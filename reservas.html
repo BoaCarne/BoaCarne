@@ -20,6 +20,7 @@
       event.preventDefault();
 
       const nombre = document.getElementById("nombre").value;
+      const telefono = document.getElementById("telefono").value;
       const personas = document.getElementById("personas").value;
       const fecha = document.getElementById("fecha").value;
       const hora = document.getElementById("hora").value;
@@ -27,6 +28,7 @@
       const mensaje =
         `🥩 *Nueva Reserva en Boa Carne*:%0A` +
         `Nombre: ${nombre}%0A` +
+        `Teléfono: ${telefono}%0A` +
         `Número de personas: ${personas}%0A` +
         `Fecha: ${fecha}%0A` +
         `Hora: ${hora}`;
@@ -58,12 +60,19 @@
     <form onsubmit="confirmarReservas(event)">
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" name="nombre" required />
+
+      <label for="telefono">Teléfono:</label>
+      <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10,15}" placeholder="Solo números" required />
+
       <label for="personas">Número de personas:</label>
       <input type="number" id="personas" name="personas" min="1" required />
+
       <label for="fecha">Fecha:</label>
       <input type="date" id="fecha" name="fecha" required />
+
       <label for="hora">Hora:</label>
       <input type="time" id="hora" name="hora" required />
+
       <button class="btn" type="submit">Reservar ahora</button>
     </form>
   </section>
