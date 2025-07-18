@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Boa Carne - Reservas</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    const phone = "5212741104674";
+    const apiKey = "6106851";
+
+    function sendWhatsAppMessage(text) {
+      const url = `https://api.callmebot.com/whatsapp.php?phone=${phone}&apikey=${apiKey}&text=${encodeURIComponent(text)}`;
+      fetch(url)
+        .then(() => console.log("Mensaje enviado a WhatsApp"))
+        .catch(() => console.error("Error enviando mensaje a WhatsApp"));
+    }
+
+    function confirmarReservas(event) {
+      event.preventDefault();
+
+      const nombre = document.getElementById("nombre").value;
+      const personas = document.getElementById("personas").value;
+      const fecha = document.getElementById("fecha").value;
+      const hora = document.getElementById("hora").value;
+
+      const mensaje =
+        `🥩 *Nueva Reserva en Boa Carne*:%0A` +
+        `Nombre: ${nombre}%0A` +
+        `Número de personas: ${personas}%0A` +
+        `Fecha: ${fecha}%0A` +
+        `Hora: ${hora}`;
+
+      sendWhatsAppMessage(mensaje);
+      alert("¡Tu reserva ha sido registrada!");
+      event.target.reset();
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <img src="IMG_0356.PNG" alt="Logo Boa Carne" class="logo" />
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="menu.html">Menú</a></li>
+        <li><a href="reservas.html" class="active">Reservar</a></li>
+        <li><a href="facturacion.html">Facturación</a></li>
+        <li><a href="domicilio.html">Pedidos a Domicilio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="reservas">
+    <h2>Reservar</h2>
+    <form onsubmit="confirmarReservas(event)">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required />
+      <label for="personas">Número de personas:</label>
+      <input type="number" id="personas" name="personas" min="1" required />
+      <label for="fecha">Fecha:</label>
+      <input type="date" id="fecha" name="fecha" required />
+      <label for="hora">Hora:</label>
+      <input type="time" id="hora" name="hora" required />
+      <button class="btn" type="submit">Reservar ahora</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Boa Carne - Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
