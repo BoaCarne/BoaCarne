@@ -1,108 +1,10 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Boa Carne - Restaurante</title>
+  <title>Boa Carne - Inicio</title>
   <link rel="stylesheet" href="styles.css" />
-  <script>
-    const phone = "5212741104674";
-    const apiKey = "6106851";
-
-    function sendWhatsAppMessage(text) {
-      const url = `https://api.callmebot.com/whatsapp.php?phone=${phone}&apikey=${apiKey}&text=${encodeURIComponent(text)}`;
-      fetch(url)
-        .then(() => console.log("Mensaje enviado a WhatsApp"))
-        .catch(() => console.error("Error enviando mensaje a WhatsApp"));
-    }
-
-    function confirmarReservas(event) {
-      event.preventDefault();
-
-      const nombre = document.getElementById("nombre").value;
-      const personas = document.getElementById("personas").value;
-      const fecha = document.getElementById("fecha").value;
-      const hora = document.getElementById("hora").value;
-
-      const mensaje =
-        `🥩 *Nueva Reserva en Boa Carne*:%0A` +
-        `Nombre: ${nombre}%0A` +
-        `Número de personas: ${personas}%0A` +
-        `Fecha: ${fecha}%0A` +
-        `Hora: ${hora}`;
-
-      sendWhatsAppMessage(mensaje);
-      alert("¡Tu reserva ha sido registrada!");
-      event.target.reset();
-    }
-
-    function confirmarFacturacion(event) {
-      event.preventDefault();
-
-      const folio = document.getElementById("folio").value;
-      const monto = document.getElementById("monto").value;
-      const rfc = document.getElementById("rfc").value;
-      const razon = document.getElementById("razon").value;
-      const regimen = document.getElementById("regimen").selectedOptions[0].text;
-      const codigo_postal = document.getElementById("codigo_postal").value;
-      const metodo = document.getElementById("metodo").selectedOptions[0].text;
-      const correo = document.getElementById("correo").value;
-
-      const mensaje =
-        `📄 *Nueva Solicitud de Factura en Boa Carne*:%0A` +
-        `Folio del Ticket: ${folio}%0A` +
-        `Monto Total (sin propina): ${monto}%0A` +
-        `RFC: ${rfc}%0A` +
-        `Razón Social: ${razon}%0A` +
-        `Régimen Fiscal: ${regimen}%0A` +
-        `Código Postal: ${codigo_postal}%0A` +
-        `Método de Pago: ${metodo}%0A` +
-        `Correo Electrónico: ${correo}`;
-
-      sendWhatsAppMessage(mensaje);
-      alert("Tu factura llegará entre 24 y 72 horas, al correo que proporcionó.");
-      event.target.reset();
-    }
-
-    function confirmarPedido(event) {
-      event.preventDefault();
-
-      const nombre = document.getElementById("nombrePedido").value;
-      const direccion = document.getElementById("direccionPedido").value;
-      const telefono = document.getElementById("telefonoPedido").value;
-      const cantidadLlenes = parseInt(document.getElementById("cantidadLlenes").value || 0);
-      const cantidadCases = parseInt(document.getElementById("cantidadCases").value || 0);
-      const cantidadFit = parseInt(document.getElementById("cantidadFit").value || 0);
-      const pagaCon = document.getElementById("pagaCon").value || "No especificado";
-
-      const total = (cantidadLlenes + cantidadCases + cantidadFit) * 120;
-
-      const mensaje =
-        `🍖 *Nuevo Pedido a Domicilio en Boa Carne*:%0A` +
-        `Nombre: ${nombre}%0A` +
-        `Dirección: ${direccion}%0A` +
-        `Teléfono: ${telefono}%0A` +
-        `Paquete Llenes: ${cantidadLlenes}%0A` +
-        `Paquete Cases: ${cantidadCases}%0A` +
-        `Paquete Fit: ${cantidadFit}%0A` +
-        `Total: $${total} MXN%0A` +
-        `Paga con: $${pagaCon} MXN`;
-
-      sendWhatsAppMessage(mensaje);
-      alert("¡Tu pedido fue enviado con éxito!");
-      event.target.reset();
-      document.getElementById("totalDomicilio").innerText = "0";
-    }
-
-    document.addEventListener("input", function () {
-      const l = parseInt(document.getElementById("cantidadLlenes")?.value || 0);
-      const c = parseInt(document.getElementById("cantidadCases")?.value || 0);
-      const f = parseInt(document.getElementById("cantidadFit")?.value || 0);
-      const total = (l + c + f) * 120;
-      document.getElementById("totalDomicilio").innerText = total;
-    });
-  </script>
 </head>
 <body>
   <header>
@@ -111,115 +13,22 @@
     </div>
     <nav>
       <ul>
-        <li><a href="#menu">Menú</a></li>
-        <li><a href="#reservas">Reservar</a></li>
-        <li><a href="#facturacion">Facturación</a></li>
-        <li><a href="#domicilio">Pedidos a Domicilio</a></li>
+        <li><a href="index.html" class="active">Inicio</a></li>
+        <li><a href="menu.html">Menú</a></li>
+        <li><a href="reservas.html">Reservar</a></li>
+        <li><a href="facturacion.html">Facturación</a></li>
+        <li><a href="domicilio.html">Pedidos a Domicilio</a></li>
       </ul>
     </nav>
   </header>
 
-  <section id="menu">
-    <h2>Menú</h2>
-    <p>Descubre nuestros cortes.</p>
-    <button class="btn">Ver Menú</button>
-  </section>
-
-  <section id="reservas">
-    <h2>Reservar</h2>
-    <form onsubmit="confirmarReservas(event)">
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" required />
-      <label for="personas">Número de personas:</label>
-      <input type="number" id="personas" name="personas" min="1" required />
-      <label for="fecha">Fecha:</label>
-      <input type="date" id="fecha" name="fecha" required />
-      <label for="hora">Hora:</label>
-      <input type="time" id="hora" name="hora" required />
-      <button class="btn" type="submit">Reservar ahora</button>
-    </form>
-  </section>
-
-  <section id="facturacion">
-    <h2>Facturación</h2>
-    <form onsubmit="confirmarFacturacion(event)">
-      <label for="folio">Folio del Ticket:</label>
-      <input type="text" id="folio" name="folio" required />
-      <label for="monto">Monto Total (sin propina):</label>
-      <input type="number" id="monto" name="monto" step="0.01" required />
-      <label for="rfc">RFC:</label>
-      <input
-        type="text"
-        id="rfc"
-        name="rfc"
-        required
-        maxlength="13"
-        pattern="[A-Z0-9]{12,13}"
-        title="RFC válido (12 o 13 caracteres, sin espacios ni acentos)"
-        oninput="this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '')"
-      />
-      <label for="razon">Razón Social:</label>
-      <input
-        type="text"
-        id="razon"
-        name="razon"
-        required
-        oninput="this.value = this.value.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Z0-9\s.]/g, '')"
-      />
-      <label for="regimen">Régimen Fiscal:</label>
-      <select id="regimen" name="regimen" required>
-        <option value="601">General de Ley Personas Morales</option>
-        <option value="603">Personas Morales con Fines no Lucrativos</option>
-        <option value="605">Sueldos y Salarios e Ingresos Asimilados a Salarios</option>
-        <option value="606">Arrendamiento</option>
-        <option value="607">Régimen de Enajenación o Adquisición de Bienes</option>
-        <option value="608">Demás ingresos</option>
-        <option value="609">Consolidación</option>
-        <option value="610">Residentes en el Extranjero</option>
-        <option value="611">Ingresos por Dividendos</option>
-        <option value="612">Personas Físicas con Actividades Empresariales</option>
-        <option value="614">Ingresos por Intereses</option>
-        <option value="615">Obtención de Premios</option>
-        <option value="616">Sin obligaciones fiscales</option>
-        <option value="621">Incorporación Fiscal</option>
-        <option value="622">Actividades Agropecuarias</option>
-        <option value="625">Plataformas Tecnológicas</option>
-        <option value="626">Régimen Simplificado de Confianza</option>
-      </select>
-      <label for="codigo_postal">Código Postal:</label>
-      <input type="text" id="codigo_postal" name="codigo_postal" required />
-      <label for="metodo">Método de Pago:</label>
-      <select id="metodo" name="metodo" required>
-        <option value="Efectivo">Efectivo</option>
-        <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
-        <option value="Tarjeta de Débito">Tarjeta de Débito</option>
-      </select>
-      <label for="correo">Correo Electrónico:</label>
-      <input type="email" id="correo" name="correo" required />
-      <button class="btn" type="submit">Solicitar Factura</button>
-    </form>
-  </section>
-
-  <section id="domicilio">
-    <h2>Pedidos a Domicilio</h2>
-    <form onsubmit="confirmarPedido(event)">
-      <label for="nombrePedido">Nombre:</label>
-      <input type="text" id="nombrePedido" required />
-      <label for="direccionPedido">Domicilio:</label>
-      <input type="text" id="direccionPedido" required />
-      <label for="telefonoPedido">Teléfono:</label>
-      <input type="tel" id="telefonoPedido" required />
-      <label>Paquete Llenes ($120):</label>
-      <input type="number" id="cantidadLlenes" min="0" value="0" />
-      <label>Paquete Cases ($120):</label>
-      <input type="number" id="cantidadCases" min="0" value="0" />
-      <label>Paquete Fit ($120):</label>
-      <input type="number" id="cantidadFit" min="0" value="0" />
-      <p><strong>Total: $<span id="totalDomicilio">0</span> MXN</strong></p>
-      <label for="pagaCon">¿Con cuánto pagas? (opcional):</label>
-      <input type="number" id="pagaCon" min="0" />
-      <button class="btn" type="submit">Pedir Ahora</button>
-    </form>
+  <section id="sobre-nosotros">
+    <h2>Sobre Nosotros</h2>
+    <p>
+      En Boa Carne, nos especializamos en ofrecer cortes de carne al estilo brasileño,
+      con un ambiente acogedor y un servicio excepcional. Nuestro compromiso es brindar
+      una experiencia gastronómica inolvidable para ti y tus seres queridos.
+    </p>
   </section>
 
   <footer>
