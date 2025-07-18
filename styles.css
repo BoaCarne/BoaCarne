@@ -3,16 +3,11 @@ body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   color: #fff;
-  background: url('fondo.jpg') no-repeat center center fixed;
+  background-image: url('fondo.jpg');
   background-size: cover;
-}
-
-/* Ajustes para móviles donde 'fixed' no funciona bien */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-    background-position: center top;
-  }
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll; /* compatible en móvil */
 }
 
 /* Encabezado */
@@ -28,17 +23,18 @@ body {
   height: auto;
 }
 
-/* Navegación */
+/* Menú de navegación */
 nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* permite que baje si no cabe */
   background-color: rgba(0, 0, 0, 0.7);
 }
 
 nav ul li {
-  display: inline-block;
   margin: 10px;
 }
 
@@ -49,6 +45,8 @@ nav ul li a {
   border-radius: 5px;
   font-weight: bold;
   transition: background-color 0.3s ease;
+  display: inline-block;
+  white-space: nowrap;
 }
 
 nav ul li a:hover,
@@ -85,6 +83,8 @@ h2 {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  text-align: center;
+  display: inline-block;
 }
 
 .btn:hover {
@@ -126,13 +126,8 @@ footer {
   margin: 10px;
 }
 
-/* Responsive */
+/* Responsive ajustes generales */
 @media (max-width: 768px) {
-  nav ul li {
-    display: block;
-    margin: 8px 0;
-  }
-
   .logo {
     max-width: 140px;
   }
