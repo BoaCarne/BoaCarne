@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Boa Carne - Pedidos a Domicilio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    const phone = "5212741104674";
+    const apiKey = "6106851";
+
+    function sendWhatsAppMessage(text) {
+      const url = `https://api.callmebot.com/whatsapp.php?phone=${phone}&apikey=${apiKey}&text=${encodeURIComponent(text)}`;
+      fetch(url)
+        .then(() => console.log("Mensaje enviado a WhatsApp"))
+        .catch(() => console.error("Error enviando mensaje a WhatsApp"));
+    }
+
+    function confirmarPedido(event) {
+      event.preventDefault();
+
+      const nombre = document.getElementById("nombrePedido").value;
+      const direccion = document.getElementById("direccionPedido").value;
+      const telefono = document.getElementById("telefonoPedido").value;
+      const cantidadLlenes = parseInt(document.getElementById("cantidadLlenes").value || 0);
+      const cantidadCases = parseInt(document.getElementById("cantidadCases").value || 0);
+      const cantidadFit = parseInt(document.getElementById("cantidadFit").value || 0);
+      const pagaCon = document.getElementById("pagaCon").value || "No especificado";
+
+      const total = (cantidadLlenes + cantidadCases + cantidadFit) * 120;
+
+      const mensaje =
+        `🍖 *Nuevo Pedido a Domicilio en Boa Carne*:%0A` +
+        `Nombre: ${nombre}%0A` +
+        `Dirección: ${direccion}%0A` +
+        `Teléfono: ${telefono}%0A` +
+        `Paquete Llenes: ${cantidadLlenes}%0A` +
+        `Paquete Cases: ${cantidadCases}%0A` +
+        `Paquete Fit: ${cantidadFit}%0A` +
+        `Total: $${total} MXN%0A` +
+        `Paga con: $${pagaCon} MXN`;
+
+      sendWhatsAppMessage(mensaje);
+      alert("¡Tu pedido fue enviado con éxito!");
+      event.target.reset();
+      document.getElementById("totalDomicilio").innerText = "0";
+    }
+
+    document.addEventListener("input", function () {
+      const l = parseInt(document.getElementById("cantidadLlenes")?.value || 0);
+      const c = parseInt(document.getElementById("cantidadCases")?.value || 0);
+      const f = parseInt(document.getElementById("cantidadFit")?.value || 0);
+      const total = (l + c + f) * 120;
+      document.getElementById("totalDomicilio").innerText = total;
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <img src="IMG_0356.PNG" alt="Logo Boa Carne" class="logo" />
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="menu.html">Menú</a></li>
+        <li><a href="reservas.html">Reservar</a></li>
+        <li><a href="facturacion.html">Facturación</a></li>
+        <li><a href="domicilio.html" class="active">Pedidos a Domicilio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="domicilio">
+    <h2>Pedidos a Domicilio</h2>
+    <form onsubmit="confirmarPedido(event)">
+      <label for="nombrePedido">Nombre:</label>
+      <input type="text" id="nombrePedido" required />
+      <label for="direccionPedido">Domicilio:</label>
+      <input type="text" id="direccionPedido" required />
+      <label for="telefonoPedido">Teléfono:</label>
+      <input type="tel" id="telefonoPedido" required />
+      <label>Paquete Llenes ($120):</label>
+      <input type="number" id="cantidadLlenes" min="0" value="0" />
+      <label>Paquete Cases ($120):</label>
+      <input type="number" id="cantidadCases" min="0" value="0" />
+      <label>Paquete Fit ($120):</label>
+      <input type="number" id="cantidadFit" min="0" value="0" />
+      <p><strong>Total: $<span id="totalDomicilio">0</span> MXN</strong></p>
+      <label for="pagaCon">¿Con cuánto pagas? (opcional):</label>
+      <input type="number" id="pagaCon" min="0" />
+      <button class="btn" type="submit">Pedir Ahora</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Boa Carne - Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
