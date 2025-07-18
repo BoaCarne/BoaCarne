@@ -1,153 +1,99 @@
-/* Estilos generales */
+/* Estilos base */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  padding: 0;
-  color: #f0f0f0;
-  position: relative;
-  min-height: 100vh;
-  background-image: url('fondo.png');
+  font-family: sans-serif;
+  background-image: url('fondo.jpg');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
   background-attachment: fixed;
-  z-index: 0;
+  color: #fff;
 }
 
-/* Capa oscura translúcida sobre el fondo */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* Negro con 50% opacidad */
-  z-index: -1;
-  pointer-events: none;
+.header-container {
+  text-align: center;
+  padding: 1rem;
 }
 
-/* Header */
-header {
-  background-color: #3e1f0d;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.header-container .logo {
-  height: 60px;
+.logo {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
 }
 
 nav ul {
   list-style: none;
-  display: flex;
-  gap: 25px;
-  margin: 0;
   padding: 0;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+nav ul li {
+  display: inline-block;
+  margin: 10px;
 }
 
 nav ul li a {
-  color: #f0f0f0;
   text-decoration: none;
-  font-weight: 600;
-  padding: 8px 12px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
 }
 
 nav ul li a:hover,
 nav ul li a.active {
   background-color: #b15b25;
-  color: #fff;
 }
 
 section {
-  padding: 40px 20px;
-  max-width: 900px;
-  margin: 30px auto;
-  background: #2c2c2c;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(177, 91, 37, 0.4);
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 1rem;
+  border-radius: 12px;
 }
 
-h2 {
-  color: #b15b25;
-  margin-bottom: 20px;
-  font-weight: 700;
-  font-size: 2rem;
-}
-
-p {
-  font-size: 1.1rem;
-  line-height: 1.5;
-  color: #d0cfcf;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-label {
-  font-weight: 600;
-  color: #e0d6d1;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="email"],
-input[type="date"],
-input[type="time"],
-input[type="tel"],
-select {
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
+/* Botones */
 .btn {
   background-color: #b15b25;
-  color: #fff;
-  font-weight: 700;
-  padding: 12px 25px;
+  color: white;
   border: none;
+  padding: 12px 20px;
   border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: 1.1rem;
-  max-width: 200px;
+  transition: background-color 0.3s;
 }
 
 .btn:hover {
-  background-color: #d37237;
+  background-color: #a04a1e;
 }
 
-footer {
-  text-align: center;
-  padding: 15px;
-  color: #9e8a81;
-  font-size: 0.9rem;
-  margin-top: 40px;
-}
-
+/* Centrado de botones */
 #ubicacion-whatsapp {
   text-align: center;
 }
 
 #ubicacion-whatsapp .btn {
   margin: 10px;
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+  nav ul li {
+    display: block;
+    margin: 10px 0;
+  }
+
+  section {
+    margin: 1rem 0.5rem;
+    padding: 1rem;
+  }
+
+  .logo {
+    max-width: 150px;
+  }
+
+  .btn {
+    width: 90%;
+    max-width: 300px;
+  }
 }
