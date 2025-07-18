@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boa Carne - Restaurante</title>
+    <link rel="stylesheet" href="styles.css">
+    
+<script>
+    function sendWhatsAppReserva(nombre, personas, fecha, hora) {
+        const message = `🥩 *Nueva Reserva en Boa Carne*:%0ANombre: ${nombre}%0APersonas: ${personas}%0AFecha: ${fecha}%0AHora: ${hora}`;
+        fetch(`https://api.callmebot.com/whatsapp.php?phone=5212741104674&apikey=6106851&text=` + message)
+            .then(response => console.log("Mensaje enviado a WhatsApp"))
+            .catch(error => console.error("Error al enviar mensaje de WhatsApp", error));
+    }
+
+    function confirmarReservas() {
+        const nombre = document.getElementById("nombre").value;
+        const personas = document.getElementById("personas").value;
+        const fecha = document.getElementById("fecha").value;
+        const hora = document.getElementById("hora").value;
+        sendWhatsAppReserva(nombre, personas, fecha, hora);
+        alert("¡Tu reserva ha sido registrada! Te llegará confirmación por correo y WhatsApp.");
+    }
+</script>
+
+    
+<script>
+    function sendWhatsAppFactura(data) {
+        const message = `📄 *Nueva Solicitud de Factura*:%0AFolio: ${data.folio}%0AMonto: ${data.monto}%0ARFC: ${data.rfc}%0ARazón: ${data.razon}%0ARégimen: ${data.regimen}%0ACP: ${data.cp}%0AMétodo: ${data.metodo}%0ACorreo: ${data.correo}`;
+        fetch(`https://api.callmebot.com/whatsapp.php?phone=5212741104674&apikey=6106851&text=` + message)
+            .then(response => console.log("Mensaje enviado a WhatsApp"))
+            .catch(error => console.error("Error al enviar mensaje de WhatsApp", error));
+    }
+
+    function confirmarFacturacion() {
+        const data = {
+            folio: document.getElementById("folio").value,
+            monto: document.getElementById("monto").value,
+            rfc: document.getElementById("rfc").value,
+            razon: document.getElementById("razon").value,
+            regimen: document.getElementById("regimen").value,
+            cp: document.getElementById("codigo_postal").value,
+            metodo: document.getElementById("metodo").value,
+            correo: document.getElementById("correo").value,
+        };
+        sendWhatsAppFactura(data);
+        alert("Tu factura llegará entre 24 y 72 horas a tu correo electrónico.");
+    }
+</script>
+
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <img src="IMG_0356.PNG" alt="Logo Boa Carne" class="logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#reservas">Reservar</a></li>
+                <li><a href="#facturacion">Facturación</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="reservas">
+        <h2>Reservar</h2>
+        <form  onsubmit="confirmarReservas()">
+            
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <label for="personas">Número de personas:</label>
+            <input type="number" id="personas" name="personas" min="1" required>
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+            <label for="hora">Hora:</label>
+            <input type="time" id="hora" name="hora" required>
+            <button class="btn" type="submit">Reservar ahora</button>
+        </form>
+    </section>
+
+    <section id="facturacion">
+        <h2>Facturación</h2>
+        <form  onsubmit="confirmarFacturacion()">
+            
+            <label for="folio">Folio del Ticket:</label>
+            <input type="text" id="folio" name="folio" required>
+            <label for="monto">Monto Total:</label>
+            <input type="number" id="monto" name="monto" required>
+            <label for="rfc">RFC:</label>
+            <input type="text" id="rfc" name="rfc" required>
+            <label for="razon">Razón Social:</label>
+            <input type="text" id="razon" name="razon" required>
+            <label for="regimen">Régimen Fiscal:</label>
+            <input type="text" id="regimen" name="regimen" required>
+            <label for="codigo_postal">Código Postal:</label>
+            <input type="text" id="codigo_postal" name="codigo_postal" required>
+            <label for="metodo">Método de Pago:</label>
+            <input type="text" id="metodo" name="metodo" required>
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo" name="correo" required>
+            <button class="btn" type="submit">Solicitar Factura</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Boa Carne - Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
