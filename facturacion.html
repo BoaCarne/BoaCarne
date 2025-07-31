@@ -85,7 +85,7 @@
         id="razon"
         name="razon"
         required
-        oninput="this.value = this.value.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Z0-9\\s.]/g, '')"
+        oninput="this.value = this.value.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Z0-9\s.]/g, '')"
       />
       <label for="regimen">Régimen Fiscal:</label>
       <select id="regimen" name="regimen" required>
